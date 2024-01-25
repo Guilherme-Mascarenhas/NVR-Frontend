@@ -62,16 +62,15 @@ function VideoPlayer() {
 	};
 
 	return (
-		<div className="text-center">
-			<div>
+		<div className="text-center ">
+			<div className="mb-4 mt-4">
 				{imageURL ? (
 					<img src={imageURL} alt="Imagem" className="mx-auto border" />
 				) : (
 					<img
 						src="/images/camera-desconnect.png"
 						alt="Imagem"
-						className="mx-auto border"
-						style={{ width: "480px", height: "300px" }}
+						style={{ width: "640px", height: "480px" }}
 					/>
 				)}
 			</div>
