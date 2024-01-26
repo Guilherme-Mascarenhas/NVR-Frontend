@@ -5,7 +5,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ErrorPage from "./pages/ErrorPage";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-//import VideoPlayer from "./pages/CameraNvr/teste";
+import CameraNvr from "./pages/CameraNvr";
 
 const router = createBrowserRouter([
 	{
@@ -19,6 +19,10 @@ const router = createBrowserRouter([
 	{
 		path: "/register",
 		element: <Register />,
+	},
+	{
+		path: "/camera",
+		element: <CameraNvr />,
 	},
 ]);
 
