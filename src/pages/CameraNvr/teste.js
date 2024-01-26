@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import config from "./utils/config";
+import config from "../../utils/config";
 import { connect } from "socket.io-client";
 const currentEnvironment = process.env.NODE_ENV || "development";
 const socketEndpoint = config[currentEnvironment].socketEndpoint;
