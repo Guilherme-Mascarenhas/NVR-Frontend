@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import config from "../../utils/config";
 import "./index.css";
+import MyContext from "../../components/Auth";
 
 const currentEnvironment = process.env.NODE_ENV || "development";
 const apiEndpoint = config[currentEnvironment].apiEndpoint;
@@ -11,6 +12,8 @@ const Login = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [error, setError] = useState("");
+	const { Log, setLog } = useContext(MyContext);
+	console.log(Log);
 
 	const navigate = useNavigate();
 
@@ -33,7 +36,7 @@ const Login = () => {
 			}
 
 			if (response.data.login) {
-				console.log("SA");
+				setLog(true);
 				navigate("/camera");
 			}
 		} catch (error) {
@@ -80,6 +83,7 @@ const Login = () => {
 						</div>
 					</form>
 				</div>
+				{/*
 				<div className="d-flex justify-content-between">
 					<div className="bottom-links">
 						<Link to={"register"} className="link">
@@ -90,6 +94,7 @@ const Login = () => {
 						</Link>
 					</div>
 				</div>
+				*/}
 			</div>
 		</>
 	);

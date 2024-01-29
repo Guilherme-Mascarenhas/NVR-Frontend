@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import config from "../../utils/config";
 import "./index.css";
+import { Link } from "react-router-dom";
 const currentEnvironment = process.env.NODE_ENV || "development";
 const apiEndpoint = config[currentEnvironment].apiEndpoint;
 
@@ -86,6 +87,13 @@ const Login = () => {
 						</button>
 					</div>
 				</form>
+			</div>
+			<div className="d-flex justify-content-between">
+				<div className="bottom-links">
+					<Link to={"/"} className="link">
+						Voltar
+					</Link>
+				</div>
 			</div>
 		</div>
 	);

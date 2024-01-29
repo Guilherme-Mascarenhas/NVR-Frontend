@@ -25,12 +25,10 @@
 .bottom-links {
 	display: flex;
 	flex-direction: row; /* Coloca os elementos ao lado */
-	align-items: center;
+	width: 300px;
 }
 
 .link {
-	margin-right: 15px; /* Adicione margem à direita do primeiro link */
-	margin-left: 15px; /* Adicione margem à esquerda do segundo link */
 	color: #165cad; /* Cor do texto */
 	text-decoration: none; /* Remove a sublinhado padrão */
 	font-weight: bold;

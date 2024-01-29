@@ -1,15 +1,19 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import axios from "axios";
 import config from "../../utils/config";
-import { connect } from "socket.io-client";
+import "./index.css";
+import MyContext from "../../components/Auth";
+import { useNavigate } from "react-router-dom";
 const currentEnvironment = process.env.NODE_ENV || "development";
 const socketEndpoint = config[currentEnvironment].socketEndpoint;
 
 function VideoPlayer() {
 	const [imageURL, setImageURL] = useState(false);
-	const [connected, setConnected] = useState(false);
+	const [Spinner, setSpinner] = useState(false);
 	const [connectAttempt, setConnectAttempt] = useState(0);
 	const [selectedCamera, setSelectedCamera] = useState(null);
+	const { Log, setLog } = useContext(MyContext);
+	const navigate = useNavigate();
 	const websocket = useRef(null);
 	let max_attemps = 5;
 
@@ -28,6 +32,7 @@ function VideoPlayer() {
 	};
 
 	const changeChannel = async (channel) => {
+		setSpinner(true);
 		console.log(channel);
 		setSelectedCamera("Cam" + channel);
 
@@ -46,6 +51,7 @@ function VideoPlayer() {
 					if (blob.size > 8) {
 						const url = URL.createObjectURL(blob);
 						//console.log(url);
+						setSpinner(false);
 						setImageURL(url);
 					}
 					websocket.current.onclose = () => {
@@ -61,9 +67,16 @@ function VideoPlayer() {
 		}
 	};
 
+	useEffect(() => {
+		console.log(Log);
+		if (!Log) {
+			navigate("/");
+		}
+	}, []);
+
 	return (
 		<div className="text-center ">
-			<div className="mb-4 mt-4">
+			<div className="mb-4 mt-4 text-center position-relative">
 				{imageURL ? (
 					<img src={imageURL} alt="Imagem" className="mx-auto border" />
 				) : (
@@ -72,6 +85,22 @@ function VideoPlayer() {
 						alt="Imagem"
 						style={{ width: "640px", height: "480px" }}
 					/>
+				)}
+
+				{Spinner ? (
+					<div className="position-absolute top-50 start-50 translate-middle">
+						<div
+							className="spinner-border text-light"
+							style={{ display: "block" }}
+							role="status"></div>
+					</div>
+				) : (
+					<div className="position-absolute top-50 start-50 translate-middle">
+						<div
+							className="spinner-border text-light"
+							style={{ display: "none" }}
+							role="status"></div>
+					</div>
 				)}
 			</div>
 			<div className="dropdown">
