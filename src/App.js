@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import JSMpeg from 'jsmpeg';
 import config from './utils/config';
 import './App.css';
 const currentEnvironment = process.env.NODE_ENV || 'development';
